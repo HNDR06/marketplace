@@ -5,7 +5,7 @@
       <q-toolbar class="text-primary q-my-sm">
         <!-- Logo -->
         <router-link :to="{ name: 'home' }">
-          <img src="/img/logo.png" width="80" class="q-pa-xs" />
+          <img src="/img/logobasari.png" width="80" class="q-pa-xs" />
         </router-link>
 
         <!-- Tab -->
@@ -112,7 +112,7 @@
           <!-- Logo -->
           <q-toolbar-title>
             <router-link :to="{ name: 'home' }">
-              <img src="/img/logo.png" width="50" class="q-pa-xs q-mx-md" />
+              <img src="/img/logobasari.png" width="50" class="q-pa-xs q-mx-md" />
             </router-link>
           </q-toolbar-title>
 
