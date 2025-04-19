@@ -40,6 +40,11 @@
         <p class="float-right"><q-icon name="manage_accounts" size="20px" /></p>
         <br />
       </div>
+      <div class="q-pa-sm q-py-md q-pl-md border" @click="navigateTo('home.settingalamat')">
+        <p class="float-left">Alamat Saya</p>
+        <p class="float-right"><q-icon name="manage_accounts" size="20px" /></p>
+        <br />
+      </div>
       <div class="q-pa-sm q-py-md q-pl-md border" @click="navigateTo('home.cart')">
         <p class="float-left">Keranjang Saya</p>
         <p class="float-right"><q-icon name="shopping_cart" size="20px" /></p>
