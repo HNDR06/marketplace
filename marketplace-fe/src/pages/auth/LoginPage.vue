@@ -1,10 +1,10 @@
 <template>
   <q-page class="row justify-center items-center self-center q-my-xl">
     <div class="col-md-6 text-center">
-      <q-img src="/img/login-placeholder.png" alt="" class="q-mb-md" style="width: 500px" />
+      <q-img src="public\img\11.png" alt="" class="q-mb-md" style="width: 500px" />
     </div>
     <div class="col-md-5">
-      <div class="text-h5 q-mx-lg">Belanja kebutuhan utama, menjadi lebih mudah</div>
+      <div class="text-h5 q-mx-lg">Selamat Datang di Toko Kami, Silahkan Login Untuk Order</div>
       <div class="row justify-center">
         <q-form @submit="login" class="col-9">
           <!-- Email -->
