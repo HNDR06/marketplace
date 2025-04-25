@@ -12,34 +12,36 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            'avatar' => 'nullable',
+            // 'avatar' => 'nullable',
             'username' => 'required|string|min:6|max:20|unique:users,username',
-            'name' => 'required|string|max:50',
+            // 'name' => 'nullable|string|max:50',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
             'confirm_password' => 'required|same:password',
-            'phone_number' => 'nullable|string',
-            'province_id' => 'nullable|integer',
-            'regency_id' => 'nullable|integer',
-            'district_id' => 'nullable|integer',
-            'village_id' => 'nullable|integer',
-            'country' => 'nullable|string',
-            'zip_code' => 'nullable|integer',
-            'address_one' => 'nullable',
-            'address_two' => 'nullable',
-            'store_name' => 'nullable|string',
-            'category' => 'nullable|string',
-            'store_status' => 'nullable|integer'
+            // 'phone_number' => 'nullable|string',
+            // 'province_id' => 'nullable|integer',
+            // 'regency_id' => 'nullable|integer',
+            // 'district_id' => 'nullable|integer',
+            // 'village_id' => 'nullable|integer',
+            // 'country' => 'nullable|string',
+            // 'zip_code' => 'nullable|integer',
+            // 'address_one' => 'nullable',
+            // 'address_two' => 'nullable',
+            // 'store_name' => 'nullable|string',
+            // 'category' => 'nullable|string',
+            // 'store_status' => 'nullable|integer'
         ]);
 
-        // Avatar
-        if ($request->hasFile('avatar')) {
-            $avatarName = time() . '-' . auth()->user()->username . '.' . $request->avatar->getClientOriginalExtension();
-            $request->avatar->move(public_path('avatars'), $avatarName);
-            $data['avatar'] = $avatarName;
-        }
+        // // Avatar
+        // if ($request->hasFile('avatar')) {
+        //     $avatarName = time() . '-' . auth()->user()->username . '.' . $request->avatar->getClientOriginalExtension();
+        //     $request->avatar->move(public_path('avatars'), $avatarName);
+        //     $data['avatar'] = $avatarName;
+        // }
 
         $input = $request->all();
+        // $input['name'] = "Default Name";
+        $input['role'] = "Customer";
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $token =  $user->createToken('marketplace')->plainTextToken;

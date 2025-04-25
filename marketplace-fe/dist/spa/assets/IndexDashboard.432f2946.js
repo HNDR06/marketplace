@@ -1,0 +1,1 @@
+import{Q as a}from"./QPage.47df145d.js";import{m as e,n as s,p as o,z as t}from"./index.3411a222.js";const r=t("h1",null,"Dashboard Home",-1),d={__name:"IndexDashboard",setup(c){return(_,n)=>(e(),s(a,{class:"q-pa-sm"},{default:o(()=>[r]),_:1}))}};export{d as default};
