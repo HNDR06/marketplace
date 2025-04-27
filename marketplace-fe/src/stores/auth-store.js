@@ -55,6 +55,13 @@ export const useAuthStore = defineStore('auth', {
       window.location.reload()
 
       return await server.get('api/auth/logout', { headers })
+    },
+
+    async logingoogle(access_token, expires_in) {
+      return await server.post('api/auth/logingoogle', {
+        access_token,
+        expires_in
+      })
     }
   }
 })

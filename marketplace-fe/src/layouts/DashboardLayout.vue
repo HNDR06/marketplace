@@ -24,7 +24,7 @@
           <q-btn-dropdown v-else color="primary" class="q-mx-sm" rounded dense flat push no-caps>
             <template v-slot:label>
               <q-avatar size="30px">
-                <img :src="url + '/avatars/' + profile.avatar" />
+                <img :src="profile.avatar" />
               </q-avatar>
             </template>
             <div class="row no-wrap q-pa-md">
@@ -54,11 +54,11 @@
 
               <div class="column items-center">
                 <q-avatar size="72px" class="q-mx-md">
-                  <img :src="url + '/avatars/' + profile.avatar" />
+                  <img :src="profile.avatar" />
                 </q-avatar>
 
                 <div class="nav-profile text-subtitle1 text-grey-8 q-mt-sm">{{ profile.username }}</div>
-                <div class="nav-profile text-subtitle2 text-bold q-mb-md q-mt-xs" style="max-width: 150px">{{ profile.name }}</div>
+                <div class="nav-profile text-subtitle2 text-bold q-mb-md q-mt-xs" style="max-width: 150px">{{ profile.role }}</div>
 
                 <q-btn color="primary" label="Keluar" push size="sm" v-close-popup @click="logout" />
               </div>

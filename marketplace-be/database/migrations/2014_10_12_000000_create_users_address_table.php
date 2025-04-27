@@ -11,11 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('users_address', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
-            $table->integer('quantity');
+            $table->string('user_id');
+            $table->string('street');
+            $table->string('RT');
+            $table->string('RW');
+            $table->string('village');
+            $table->string('district');
+            $table->string('city');
+            $table->string('province');
+            $table->string('nation');
+            $table->string('postal_code');
+            $table->string('additional_info')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->string('CompanyCode', 0)->nullable();
@@ -25,9 +33,6 @@ return new class extends Migration
             $table->timestamp('CreatedDate')->useCurrent();
             $table->string('LastUpdatedBy', 32)->nullable();
             $table->timestamp('LastUpdatedDate')->useCurrent();
-
-            $table->foreign('product_id')->references('id')->on('products')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -36,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('users_address');
     }
 };

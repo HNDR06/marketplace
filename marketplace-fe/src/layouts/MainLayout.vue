@@ -40,7 +40,7 @@
               <q-skeleton v-if="loading" type="QAvatar" size="26px" />
 
               <q-avatar v-else size="26px">
-                <img :src="url + '/avatars/' + profile.avatar" />
+                <img :src="profile.avatar" />
               </q-avatar>
             </template>
             <div class="row no-wrap q-pa-md">
@@ -76,7 +76,7 @@
 
               <div class="column items-center">
                 <q-avatar size="72px" class="q-mx-md">
-                  <img :src="url + '/avatars/' + profile.avatar" />
+                  <img :src="profile.avatar" />
                 </q-avatar>
 
                 <div class="nav-profile text-subtitle1 text-grey-8 q-mt-sm">{{ profile.username }}</div>
@@ -137,7 +137,7 @@
                 <q-skeleton v-if="loading" type="QAvatar" size="26px" />
 
                 <q-avatar v-else size="26px">
-                  <img :src="url + '/avatars/' + profile.avatar" />
+                  <img :src="profile.avatar" />
                 </q-avatar>
               </template>
               <div class="row no-wrap q-pa-md">
@@ -173,11 +173,11 @@
 
                 <div class="column items-center">
                   <q-avatar size="72px" class="q-mx-md">
-                    <img :src="url + '/avatars/' + profile.avatar" />
+                    <img :src="profile.avatar" />
                   </q-avatar>
 
                   <div class="nav-profile text-subtitle1 text-grey-8 q-mt-sm">{{ profile.username }}</div>
-                  <div class="nav-profile text-subtitle2 text-bold q-mb-md q-mt-xs" style="max-width: 150px">{{ profile.name }}</div>
+                  <div class="nav-profile text-subtitle2 text-bold q-mb-md q-mt-xs" style="max-width: 150px">{{ profile.role }}</div>
 
                   <q-btn color="primary" label="Keluar" push size="sm" v-close-popup @click="logout" />
                 </div>
@@ -210,7 +210,7 @@
             <q-skeleton v-if="loading" type="QAvatar" size="20px" />
 
             <q-avatar v-else size="20px">
-              <img :src="url + '/avatars/' + profile.avatar" />
+              <img :src="profile.avatar" />
             </q-avatar>
           </q-route-tab>
         </q-tabs>

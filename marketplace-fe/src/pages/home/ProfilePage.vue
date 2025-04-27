@@ -18,11 +18,12 @@
       <div v-else class="row justify-center">
         <div class="col-12 text-center">
           <q-avatar size="80px" class="q-ma-md">
-            <img :src="url + '/avatars/' + profile.avatar" />
+            <img :src="profile.avatar" />
           </q-avatar>
         </div>
         <div class="col-12">
           <div class="text-body2 text-center text-bold">{{ profile.name }}</div>
+          <div class="text-body2 text-center">{{ profile.role }}</div>
           <div class="text-body2 text-center">{{ profile.email }}</div>
         </div>
       </div>

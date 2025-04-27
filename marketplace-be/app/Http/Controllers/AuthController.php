@@ -6,6 +6,8 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+use PhpParser\Node\Stmt\Else_;
 
 class AuthController extends Controller
 {
@@ -42,9 +44,15 @@ class AuthController extends Controller
         $input = $request->all();
         // $input['name'] = "Default Name";
         $input['role'] = "Customer";
+        $input['provider'] = "Web";
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $token =  $user->createToken('marketplace')->plainTextToken;
+        $usertoken= User::updateOrCreate([
+            'email' => $input['email'],
+        ], [ 'remember_token' => $token,
+        ]);
+
         $data = [
             'token' => $token,
             'user' => new UserResource($user)
@@ -92,5 +100,90 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'Logout Successfully'
         ]);
+    }
+
+    public function googleredirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callback()
+    {
+        $socialuser = Socialite::driver('google')->user();
+        $registeduser = User::where("user_id", $socialuser->id)->first();
+
+        if(!$registeduser){
+        $user = User::updateOrCreate([
+                'user_id' => $socialuser->id,
+        ], [
+                'username' => $socialuser->name,
+                'email' => $socialuser->email,
+                'password' => bcrypt('defaultpassword'),
+                'provider' => 'Google',
+                'role' => 'Customer',
+                'token' => $socialuser->token,
+                'refresh_token' => $socialuser->refreshToken,
+        ]);
+        }
+
+
+        if(Auth::attempt(['email' => $socialuser->email, 'password' => 'defaultpassword'])) {
+
+            $success['token'] =  $user->createToken('marketplace')->plainTextToken;
+            $success['user'] =  new UserResource($user);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Login Successfully',
+                'data' => $success
+            ]);
+
+        } else {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Email or Password Failed, Please try again later'
+            ], 403);
+        }
+    }
+    public function logingoogle(Request $request)
+    {
+
+        $url ='https://www.googleapis.com/oauth2/v2/userinfo?access_token=' . $request->access_token;
+        $json = file_get_contents($url);
+        $socialuser = json_decode($json);
+        // dd($socialuser);
+        $user = User::updateOrCreate([
+                'user_id' => $socialuser->id,
+        ], [
+                'username' => $socialuser->name,
+                'email' => $socialuser->email,
+                'password' => bcrypt('defaultpassword'),
+                'provider' => 'Google',
+                'role' => 'Customer',
+                'token' => $request->access_token,
+                'firstname' => $socialuser->given_name,
+                'lastname' => $socialuser->family_name,
+                'avatar' => $socialuser->picture,
+
+        ]);
+
+
+
+
+        if(Auth::attempt(['email' => $socialuser->email, 'password' => 'defaultpassword'])) {
+            $success['token'] =  $user->createToken('marketplace')->plainTextToken;
+            $success['user'] =  new UserResource($user);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Login Successfully',
+                'data' => $success
+            ]);
+
+        } else {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Email or Password Failed, Please try again later'
+            ], 403);
+        }
     }
 }

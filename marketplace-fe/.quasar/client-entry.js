@@ -22,6 +22,14 @@ import { createApp } from 'vue'
 
 import '@quasar/extras/mdi-v5/mdi-v5.css'
 
+import '@quasar/extras/fontawesome-v6/fontawesome-v6.css'
+
+import '@quasar/extras/eva-icons/eva-icons.css'
+
+import '@quasar/extras/themify/themify.css'
+
+import '@quasar/extras/line-awesome/line-awesome.css'
+
 import '@quasar/extras/material-icons/material-icons.css'
 
 
@@ -156,7 +164,9 @@ createQuasarApp(createApp, quasarUserOptions)
       
       import('boot/auth'),
       
-      import('boot/role')
+      import('boot/role'),
+      
+      import('boot/googlelogin')
       
     ]).then(bootFiles => {
       const boot = mapFn(bootFiles).filter(entry => typeof entry === 'function')

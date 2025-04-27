@@ -35,6 +35,13 @@
           </div>
         </q-form>
       </div>
+      <div class="q-my-sm text-center">
+        <div class="text-h8">Atau</div>
+        <q-btn round class="q-my-sm" color="red" label="" icon="mdi-google" @click="googlelogin" />
+        <q-btn round class="q-my-sm" color="black" label="" icon="mdi-github" @click="githublogin" />
+        <q-btn round class="q-my-sm" color="blue" label="" icon="mdi-facebook" @click="fblogin" />
+      </div>
+      <!-- Google Login -->
     </div>
   </q-page>
 </template>
@@ -43,6 +50,7 @@
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useAuthStore } from '/src/stores/auth-store'
+import { googleTokenLogin } from 'vue3-google-login'
 
 const $q = useQuasar()
 
@@ -63,6 +71,39 @@ const login = async () => {
   try {
     const res = await useAuthStore().login(email.value, password.value)
 
+    localStorage.setItem('token', res.data.data.token)
+    localStorage.setItem('role', res.data.data.user.role)
+    $q.notify({
+      message: 'Login Berhasil',
+      icon: 'check',
+      color: 'positive'
+    })
+    // give delay when reload page (Hendra | 04/25/2025)
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000)
+  } catch (error) {
+    console.error('Error submitting form:', error)
+    $q.notify({
+      message: error.response.data.message || 'Format Email dan Password masih salah',
+      icon: 'warning',
+      color: 'negative'
+    })
+  }
+  loading.value = false
+}
+
+const googlelogin = () => {
+  googleTokenLogin().then((response) => {
+    googlelogin1(response)
+  })
+}
+
+const googlelogin1 = async (response) => {
+  // console.log(response)
+  loading.value = true
+  try {
+    const res = await useAuthStore().logingoogle(response.access_token, response.expires_in)
     localStorage.setItem('token', res.data.data.token)
     localStorage.setItem('role', res.data.data.user.role)
     $q.notify({

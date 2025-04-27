@@ -14,6 +14,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionDetailController;
 use App\Http\Controllers\SettingController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,7 +32,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-
 // ----ADDRESS---- //
 Route::prefix('address')->controller(AddressController::class)->group(function () {
     Route::get('/', 'index');
@@ -41,6 +41,7 @@ Route::prefix('address')->controller(AddressController::class)->group(function (
 Route::prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
     Route::post('/login', 'login');
+    Route::post('/logingoogle', 'logingoogle');
     Route::get('/logout', 'logout')->middleware('auth:sanctum');
 });
 
