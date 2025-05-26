@@ -67,7 +67,7 @@ class TransactionController extends Controller
 
         // Invoice
         $transactiondata['invoice'] = 'INV-' . date('YmdHis') . '-' . str_pad(Transaction::count() + 1, 5, '0', STR_PAD_LEFT);
-
+        $transactiondata['CreatedBy'] = auth()->user()->username;
         $transaction = Transaction::create($transactiondata);
 
         // Call TransactionDetailController@store
@@ -170,6 +170,8 @@ class TransactionController extends Controller
         ];
         $snapToken = \Midtrans\Snap::getSnapToken($payload);
         $data['snap_token'] = $snapToken;
+        $data['LastUpdatedBy'] = auth()->user()->username;
+        $data['LastUpdatedDate'] = now();
 
         $transaction->update($data);
 

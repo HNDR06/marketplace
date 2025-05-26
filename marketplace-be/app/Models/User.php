@@ -21,10 +21,6 @@ class User extends Authenticatable
     protected $guarded = [
         'id'
     ];
-    protected $attributes = [
-        'avatar' => 'user-profile-default.jpg',
-        'role' => 'Customer'
-    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,36 +41,41 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
-    public function carts()
-    {
-        return $this->hasMany(Cart::class);
-    }
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
-    }
-    public function province()
-    {
-        return $this->belongsTo(Province::class);
-    }
-    public function regency()
-    {
-        return $this->belongsTo(Regency::class);
-    }
-    public function district()
-    {
-        return $this->belongsTo(District::class);
-    }
-    public function village()
-    {
-        return $this->belongsTo(Village::class);
-    }
+    //Default values for attributes
+    protected $attributes = [
+        'CompanyCode' => 'default_value',
+    ];
+
+    // public function category()
+    // {
+    //     return $this->belongsTo(Category::class);
+    // }
+    // public function products()
+    // {
+    //     return $this->hasMany(Product::class);
+    // }
+    // public function carts()
+    // {
+    //     return $this->hasMany(Cart::class);
+    // }
+    // public function transactions()
+    // {
+    //     return $this->hasMany(Transaction::class);
+    // }
+    // public function province()
+    // {
+    //     return $this->belongsTo(Province::class);
+    // }
+    // public function regency()
+    // {
+    //     return $this->belongsTo(Regency::class);
+    // }
+    // public function district()
+    // {
+    //     return $this->belongsTo(District::class);
+    // }
+    // public function village()
+    // {
+    //     return $this->belongsTo(Village::class);
+    // }
 }

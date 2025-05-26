@@ -44,6 +44,8 @@ class ProductController extends Controller
         // Slug
         $slug = Str::slug($data['name']);
         $data['slug'] = Product::where('slug', $slug)->exists() ? $slug . '-' . Str::random(5) : $slug;
+        // CreatedBy by username
+        $data['CreatedBy'] = auth()->user()->username;
 
         $product = Product::create($data);
 
@@ -86,6 +88,8 @@ class ProductController extends Controller
             'photos.*' => 'nullable'
         ]);
         $data['user_id'] = auth()->id();
+        $data['LastUpdatedBy'] = auth()->user()->username;
+        $data['LastUpdatedDate'] = now();
 
         // Slug
         $slug = Str::slug($data['name']);

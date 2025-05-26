@@ -28,6 +28,8 @@ class PromotionController extends Controller
             $request->banner->move(public_path('promotions'), $bannerName);
             $data['banner'] = $bannerName;
         }
+        $data['CreatedBy'] = auth()->user()->username;
+
 
         $promotion = Promotion::create($data);
 
@@ -58,6 +60,8 @@ class PromotionController extends Controller
             $request->banner->move(public_path('promotions'), $bannerName);
             $data['banner'] = $bannerName;
         }
+        $data['LastUpdatedBy'] = auth()->user()->username;
+        $data['LastUpdatedDate'] = now();
 
         $promotion->update($data);
 

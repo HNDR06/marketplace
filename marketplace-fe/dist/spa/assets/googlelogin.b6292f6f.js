@@ -1,0 +1,1 @@
+import{c as p,A as t}from"./index.2389b303.js";import{L as e}from"./index.esm.5de219e2.js";const o=p(t);o.use(e,{clientId:"559652152434-fkrgre1cjkaoqgvd55o71ki55gjotu00.apps.googleusercontent.com"});o.mount("#app");

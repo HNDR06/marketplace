@@ -18,6 +18,10 @@ class PromotionResource extends JsonResource
             'id' => $this->id,
             'banner' => $this->banner,
             'url' => $this->url,
+            'CreatedBy' => $this->CreatedBy,
+            'LastUpdatedBy' => $this->LastUpdatedBy,
+            'CreatedDate' => $this->CreatedDate,
+            'LastUpdatedDate' => $this->LastUpdatedDate,
         ];
     }
 }

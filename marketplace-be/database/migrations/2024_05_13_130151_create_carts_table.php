@@ -18,6 +18,13 @@ return new class extends Migration
             $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
+            $table->string('CompanyCode', 0)->nullable();
+            $table->integer('Status')->default(1);
+            $table->integer('IsDeleted')->default(1);
+            $table->string('CreatedBy', 32)->nullable();
+            $table->timestamp('CreatedDate')->useCurrent();
+            $table->string('LastUpdatedBy', 32)->nullable();
+            $table->timestamp('LastUpdatedDate')->useCurrent();
 
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
