@@ -44,8 +44,6 @@ class User extends Authenticatable
     //Default values for attributes
     protected $attributes = [
         'CompanyCode' => 'default_value',
-        'CreatedBy' => 'another_default_value',
-        'LastUpdatedBy' => 'another_default_value'
     ];
 
     // public function category()

@@ -128,7 +128,7 @@
             <q-icon name="discount" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Promosi</q-item-label>
+            <q-item-label>Spanduk</q-item-label>
           </q-item-section>
         </q-item>
 

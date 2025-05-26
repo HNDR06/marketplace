@@ -19,6 +19,11 @@ class CategoryResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'icon' => $this->icon,
+            'CreatedBy' => $this->CreatedBy,
+            'LastUpdatedBy' => $this->LastUpdatedBy,
+            'CreatedDate' => $this->CreatedDate,
+            'LastUpdatedDate' => $this->LastUpdatedDate,
+
             // 'products' => ProductResource::collection($this->products)
         ];
     }

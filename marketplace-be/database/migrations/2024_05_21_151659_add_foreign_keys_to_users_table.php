@@ -22,13 +22,13 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('fk_users_to_provinces');
-            $table->dropForeign('fk_users_to_regencies');
-            $table->dropForeign('fk_users_to_districts');
-            $table->dropForeign('fk_users_to_villages');
-        });
-    }
+    // public function down(): void
+    // {
+    //     Schema::table('users', function (Blueprint $table) {
+    //         $table->dropForeign('fk_users_to_provinces');
+    //         $table->dropForeign('fk_users_to_regencies');
+    //         $table->dropForeign('fk_users_to_districts');
+    //         $table->dropForeign('fk_users_to_villages');
+    //     });
+    // }
 };

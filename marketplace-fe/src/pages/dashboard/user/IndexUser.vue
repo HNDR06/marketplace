@@ -11,7 +11,7 @@
       :grid="grid"
       :filter="filter"
       v-model:pagination="pagination"
-      :rows-per-page-options="[10, 20, 30]"
+      :rows-per-page-options="[5, 10, 15, 20]"
       :separator="tableseparator"
       virtual-scroll
       flat
@@ -85,7 +85,7 @@
         <q-td :props="props">
           <div dense square>
             <q-avatar size="60px">
-              <img :src="url + '/avatars/' + props.row.avatar" />
+              <img :src="props.row.avatar" />
             </q-avatar>
           </div>
         </q-td>
@@ -97,6 +97,34 @@
           <div dense square>
             <div class="text-bold">{{ props.row.name }}</div>
             <div>{{ props.row.username }}</div>
+          </div>
+        </q-td>
+      </template>
+      <!-- Created Date -->
+      <template #body-cell-created_date="props">
+        <q-td :props="props">
+          <div dense square>
+            <div>{{ props.row.CreatedDate }}</div>
+          </div>
+        </q-td>
+      </template>
+
+      <!-- Updated By -->
+      <template #body-cell-updated_by="props">
+        <q-td :props="props">
+          <div dense square>
+            <!-- if null kasi strip -->
+            <div v-if="props.row.LastUpdatedBy === null">-</div>
+            <div v-else-if="props.row.LastUpdatedBy">{{ props.row.LastUpdatedBy }}</div>
+          </div>
+        </q-td>
+      </template>
+
+      <!-- Updated Date -->
+      <template #body-cell-updated_date="props">
+        <q-td :props="props">
+          <div dense square>
+            <div>{{ props.row.LastUpdatedDate }}</div>
           </div>
         </q-td>
       </template>
@@ -148,7 +176,7 @@
                   <!-- Avatar -->
                   <div v-else-if="col.name === 'avatar'" dense square>
                     <q-avatar size="60px">
-                      <img :src="url + '/avatars/' + props.row.avatar" />
+                      <img :src="props.row.avatar" />
                     </q-avatar>
                   </div>
 
@@ -268,6 +296,45 @@ const currencyColumns = [
     headerStyle: 'font-weight: bolder; font-size: 13px;'
   },
   {
+    name: 'action',
+    field: 'action',
+    label: 'Aksi',
+    align: 'center',
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'user',
+    field: 'user',
+    label: 'Created By',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'created_date',
+    field: 'created_date',
+    label: 'Created Date',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'updated_by',
+    field: 'updated_by',
+    label: 'Updated By',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'updated_date',
+    field: 'updated_date',
+    label: 'Updated Date',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
     name: 'avatar',
     field: 'avatar',
     label: 'Foto Profil',
@@ -306,12 +373,6 @@ const currencyColumns = [
     align: 'left',
     sortable: true,
     headerStyle: 'font-weight: bolder; font-size: 13px;'
-  },
-  {
-    name: 'action',
-    field: 'action',
-    label: 'Aksi',
-    align: 'center'
   }
 ]
 const tableseparator = ref('horizontal')

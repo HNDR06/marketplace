@@ -11,7 +11,7 @@
       :grid="grid"
       :filter="filter"
       v-model:pagination="pagination"
-      :rows-per-page-options="[10, 20, 30]"
+      :rows-per-page-options="[5, 10, 15, 20]"
       :separator="tableseparator"
       virtual-scroll
       flat
@@ -84,8 +84,36 @@
       <template #body-cell-user="props">
         <q-td :props="props">
           <div dense square>
-            <div class="text-bold">{{ props.row.user.name }}</div>
             <div>{{ props.row.user.username }}</div>
+          </div>
+        </q-td>
+      </template>
+
+      <!-- Created Date -->
+      <template #body-cell-created_date="props">
+        <q-td :props="props">
+          <div dense square>
+            <div>{{ props.row.CreatedDate }}</div>
+          </div>
+        </q-td>
+      </template>
+
+      <!-- Updated By -->
+      <template #body-cell-updated_by="props">
+        <q-td :props="props">
+          <div dense square>
+            <!-- if null kasi strip -->
+            <div v-if="props.row.LastUpdatedBy === null">-</div>
+            <div v-else-if="props.row.LastUpdatedBy">{{ props.row.LastUpdatedBy }}</div>
+          </div>
+        </q-td>
+      </template>
+
+      <!-- Updated Date -->
+      <template #body-cell-updated_date="props">
+        <q-td :props="props">
+          <div dense square>
+            <div>{{ props.row.LastUpdatedDate }}</div>
           </div>
         </q-td>
       </template>
@@ -275,6 +303,7 @@ onMounted(() => {
   getItem()
 })
 
+console.log('Product Data:', items)
 // Create
 const addItemDialog = ref(false)
 const itemAdded = () => {
@@ -363,7 +392,31 @@ const currencyColumns = [
   {
     name: 'user',
     field: 'user',
-    label: 'Pengguna',
+    label: 'Created By',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'created_date',
+    field: 'created_date',
+    label: 'Created Date',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'updated_by',
+    field: 'updated_by',
+    label: 'Updated By',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'updated_date',
+    field: 'updated_date',
+    label: 'Updated Date',
     align: 'left',
     sortable: true,
     headerStyle: 'font-weight: bolder; font-size: 13px;'

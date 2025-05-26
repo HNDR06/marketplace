@@ -25,7 +25,11 @@ class ProductResource extends JsonResource
             'category' => $this->category,
             'user' => new UserResource($this->user),
             'photos' => $this->productGaleries,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'CreatedBy' => $this->CreatedBy,
+            'LastUpdatedBy' => $this->LastUpdatedBy,
+            'CreatedDate' => $this->CreatedDate,
+            'LastUpdatedDate' => $this->LastUpdatedDate,
         ];
     }
 }

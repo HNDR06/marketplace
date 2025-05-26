@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('user_id');
             $table->string('slug')->unique();
             $table->string('name')->unique();
             $table->string('icon');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamp('CreatedDate')->useCurrent();
             $table->string('LastUpdatedBy', 32)->nullable();
             $table->timestamp('LastUpdatedDate')->useCurrent();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
+            // $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
 
         });
     }

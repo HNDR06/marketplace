@@ -14,6 +14,10 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::prefix('auth')->controller(AuthController::class)->group(function () {
     Route::get('/redirect', 'googleredirect');
     Route::get('/{provider}/callback', 'callback');

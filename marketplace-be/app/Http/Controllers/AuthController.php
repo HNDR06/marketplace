@@ -151,24 +151,28 @@ class AuthController extends Controller
         $url ='https://www.googleapis.com/oauth2/v2/userinfo?access_token=' . $request->access_token;
         $json = file_get_contents($url);
         $socialuser = json_decode($json);
-        // dd($socialuser);
-        $user = User::updateOrCreate([
-                'user_id' => $socialuser->id,
-        ], [
-                'username' => $socialuser->name,
+        // Cek email apakah sudah terdaftar jika sudah update token
+        // jika belum terdaftar maka buat user baru
+        $registeduser = User::where("email", $socialuser->email)->first();
+        if(!$registeduser){
+            $user = User::updateOrCreate([
                 'email' => $socialuser->email,
+            ], [
+                'user_id' => $socialuser->id,
+                'username' => $socialuser->name,
                 'password' => bcrypt('defaultpassword'),
                 'provider' => 'Google',
                 'role' => 'Customer',
                 'token' => $request->access_token,
-                'firstname' => $socialuser->given_name,
-                'lastname' => $socialuser->family_name,
-                'avatar' => $socialuser->picture,
+            ]);
+        } else {
+            $user = User::where("email", $socialuser->email)->first();
+            $user->update([
+                'token' => $request->access_token,
+            ]);
+        }
 
-        ]);
-
-
-
+        // dd($socialuser);
 
         if(Auth::attempt(['email' => $socialuser->email, 'password' => 'defaultpassword'])) {
             $success['token'] =  $user->createToken('marketplace')->plainTextToken;

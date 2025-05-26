@@ -134,6 +134,8 @@ const data = ref({
   photos: item.photos
 })
 
+console.log('Edit Product Data:', data.value)
+
 // Get Category
 const categories = ref([])
 const getCategory = async () => {

@@ -45,6 +45,7 @@ class UserController extends Controller
             $request->avatar->move(public_path('avatars'), $avatarName);
             $data['avatar'] = $avatarName;
         }
+        $data['CreatedBy'] = auth()->user()->username;
 
         $user = User::create($data);
 
@@ -67,7 +68,7 @@ class UserController extends Controller
         $data = $request->validate([
             'avatar' => 'nullable',
             'username' => 'required|string|min:6|max:20',
-            'name' => 'required|string|max:50',
+            'name' => 'string|max:50',
             'email' => 'required|email',
             'role' => 'required|string|max:255',
             'phone_number' => 'nullable|string',
@@ -110,6 +111,8 @@ class UserController extends Controller
                 'data' => null
             ], 422);
         }
+        $data['LastUpdatedBy'] = auth()->user()->username;
+        $data['LastUpdatedDate'] = now();
 
         $user->update($data);
 

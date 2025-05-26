@@ -26,6 +26,8 @@ class CategoryController extends Controller
         // Slug
         $slug = Str::slug($data['name']);
         $data['slug'] = Category::where('slug', $slug)->exists() ? $slug . '-' . Str::random(5) : $slug;
+        $data['CreatedBy'] = auth()->user()->username;
+
 
         $category = Category::create($data);
 
@@ -63,7 +65,8 @@ class CategoryController extends Controller
         // Slug
         $slug = Str::slug($data['name']);
         $data['slug'] = Category::where('slug', $slug)->where('id', '<>', $category->id)->exists() ? $slug . '-' . Str::random(5) : $slug;
-
+        $data['LastUpdatedBy'] = auth()->user()->username;
+        $data['LastUpdatedDate'] = now();
         $category->update($data);
 
         return response()->json([

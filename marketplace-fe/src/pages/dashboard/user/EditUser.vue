@@ -52,7 +52,7 @@
                     <!-- Name -->
                     <div class="col-md-5 col-xs-10 q-mx-md">
                       <label class="small mb-1" for="name">Name</label>
-                      <q-input v-model="data.name" id="name" label="Name" :rules="rules.name" outlined dense required />
+                      <q-input v-model="data.name" id="name" label="Name" outlined dense />
                     </div>
 
                     <!-- Email -->
@@ -382,7 +382,7 @@ const rules = ref({
       return true
     }
   ],
-  name: [(v) => !!v || 'Nama harus diisi', (v) => v.length <= 50 || 'Nama maksimal 50 karakter'],
+  // name: [(v) => !!v || 'Nama harus diisi', (v) => v.length <= 50 || 'Nama maksimal 50 karakter'],
   email: [
     (v) => !!v || 'Email harus diisi',
     (v) => /.+@.+/.test(v) || 'Email tidak valid',
@@ -399,7 +399,7 @@ const rules = ref({
 
 // Disabled Button
 const loading = ref(false)
-const disabledButton = computed(() => loading.value || !data.value.username || !data.value.name || !data.value.email)
+const disabledButton = computed(() => loading.value || !data.value.username || !data.value.email)
 
 // Create
 const createData = async () => {

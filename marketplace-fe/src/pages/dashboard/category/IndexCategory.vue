@@ -140,6 +140,45 @@
           </q-card>
         </div>
       </template>
+      <!-- User -->
+      <template #body-cell-user="props">
+        <q-td :props="props">
+          <div dense square>
+            <!-- if null kasi strip -->
+            <div v-if="props.row.CreatedBy === null">-</div>
+            <div v-else-if="props.row.CreatedBy">{{ props.row.CreatedBy }}</div>
+          </div>
+        </q-td>
+      </template>
+
+      <!-- Created Date -->
+      <template #body-cell-created_date="props">
+        <q-td :props="props">
+          <div dense square>
+            <div>{{ props.row.CreatedDate }}</div>
+          </div>
+        </q-td>
+      </template>
+
+      <!-- Updated By -->
+      <template #body-cell-updated_by="props">
+        <q-td :props="props">
+          <div dense square>
+            <!-- if null kasi strip -->
+            <div v-if="props.row.LastUpdatedBy === null">-</div>
+            <div v-else-if="props.row.LastUpdatedBy">{{ props.row.LastUpdatedBy }}</div>
+          </div>
+        </q-td>
+      </template>
+
+      <!-- Updated Date -->
+      <template #body-cell-updated_date="props">
+        <q-td :props="props">
+          <div dense square>
+            <div>{{ props.row.LastUpdatedDate }}</div>
+          </div>
+        </q-td>
+      </template>
     </q-table>
   </q-page>
 </template>
@@ -172,6 +211,7 @@ const getItem = async () => {
 onMounted(() => {
   getItem()
 })
+console.log('Category Items:', items)
 
 // Create
 const addItemDialog = ref(false)
@@ -224,6 +264,45 @@ const currencyColumns = [
     headerStyle: 'font-weight: bolder; font-size: 13px;'
   },
   {
+    name: 'action',
+    field: 'action',
+    label: 'Aksi',
+    align: 'center',
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'user',
+    field: 'user',
+    label: 'Created By',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'created_date',
+    field: 'created_date',
+    label: 'Created Date',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'updated_by',
+    field: 'updated_by',
+    label: 'Updated By',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
+    name: 'updated_date',
+    field: 'updated_date',
+    label: 'Updated Date',
+    align: 'left',
+    sortable: true,
+    headerStyle: 'font-weight: bolder; font-size: 13px;'
+  },
+  {
     name: 'icon',
     field: 'icon',
     label: 'Ikon',
@@ -245,13 +324,6 @@ const currencyColumns = [
     label: 'Slug',
     align: 'left',
     sortable: true,
-    headerStyle: 'font-weight: bolder; font-size: 13px;'
-  },
-  {
-    name: 'action',
-    field: 'action',
-    label: 'Aksi',
-    align: 'center',
     headerStyle: 'font-weight: bolder; font-size: 13px;'
   }
 ]
